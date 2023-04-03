@@ -1,0 +1,50 @@
+{
+  "name": "@plentyswap/v3-sdk",
+  "description": "An SDK to interact with Plenty's segmented CFMM",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": "https://github.com/Plenty-network/v3-sdk.git",
+  "keywords": [
+    "tezos",
+    "plenty"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "es5"
+  },
+  "author": "AnshuJalan",
+  "module": "dist/v3-sdk.esm.js",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "@taquito/taquito": "^16.0.1",
+    "bignumber.js": "^9.1.1"
+  }
+}
