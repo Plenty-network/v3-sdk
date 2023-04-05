@@ -23,7 +23,7 @@ export abstract class Math2 {
    * Computes the quotient and remainder through euclidean division
    */
   static euclideanDivision(dividend: number, divisor: number): [number, number] {
-    const q = Math.floor(dividend / divisor);
+    const q = Math.floor(Math.abs(dividend) / divisor);
     const r = dividend % divisor;
     return [q, r < 0 ? divisor + r : r];
   }
@@ -46,7 +46,7 @@ export abstract class Math2 {
     if (places > 0) {
       return num.dividedBy(new BigNumber(2).pow(places));
     } else {
-      return num.multipliedBy(new BigNumber(2).pow(places));
+      return num.multipliedBy(new BigNumber(2).pow(Math.abs(places)));
     }
   }
 }

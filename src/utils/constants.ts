@@ -3,7 +3,7 @@ import BigNumber from "bignumber.js";
 import { Ladder } from "../types";
 
 // Safety config
-BigNumber.config({ EXPONENTIAL_AT: 540, DECIMAL_PLACES: 0, ROUNDING_MODE: BigNumber.ROUND_FLOOR });
+BigNumber.config({ EXPONENTIAL_AT: 540, ROUNDING_MODE: BigNumber.ROUND_FLOOR });
 
 // Divisor / multipler for numbers of precision 2^80
 export const Q80 = new BigNumber(2).pow(80);

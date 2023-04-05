@@ -1,16 +1,11 @@
+import { DefaultContractType, WalletContract } from "@taquito/taquito";
 import BigNumber from "bignumber.js";
+
+export type Contract = DefaultContractType | WalletContract;
 
 export interface FixedPoint {
   v: BigNumber;
   offset: number;
-}
-
-export interface TickIndex {
-  i: number;
-}
-
-export interface TickIndexBN {
-  i: BigNumber;
 }
 
 export interface BalanceNat {
@@ -25,9 +20,9 @@ export interface Ladder {
 // Fields not accessed in the SDK are not included in the type
 export interface PoolStorage {
   liquidity: BigNumber;
-  sqrt_price: { x80: BigNumber };
-  curr_tick_index: TickIndexBN;
-  curr_tick_witness: TickIndexBN;
+  sqrt_price: BigNumber;
+  curr_tick_index: BigNumber;
+  curr_tick_witness: BigNumber;
   constants: {
     tick_spacing: BigNumber;
   };
