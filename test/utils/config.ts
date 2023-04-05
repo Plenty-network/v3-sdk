@@ -1,5 +1,5 @@
 export const config = {
-  rpcURL: "https://ghostnet.ecadinfra.com/",
+  rpcURL: "https://ghostnet.smartpy.io/",
   pool: "KT1M5yHd85ikngHm5YCu9gkfM2oqtbsKak8Y",
   tokenX: {
     address: "KT1Uw1oio434UoWFuZTNKFgt5wTM9tfuf7m7",

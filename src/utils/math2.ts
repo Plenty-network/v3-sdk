@@ -49,4 +49,13 @@ export abstract class Math2 {
       return num.multipliedBy(new BigNumber(2).pow(Math.abs(places)));
     }
   }
+
+  /**
+   * Ceils a given BigNumber
+   * @param num BigNumber to be rounded up
+   */
+  static ceil(num: BigNumber): BigNumber {
+    const BN = BigNumber.clone({ ROUNDING_MODE: BigNumber.ROUND_CEIL });
+    return new BN(num).decimalPlaces(0);
+  }
 }

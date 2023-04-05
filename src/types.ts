@@ -1,5 +1,5 @@
-import { DefaultContractType, WalletContract } from "@taquito/taquito";
 import BigNumber from "bignumber.js";
+import { DefaultContractType, MichelsonMap, WalletContract } from "@taquito/taquito";
 
 export type Contract = DefaultContractType | WalletContract;
 
@@ -9,6 +9,11 @@ export interface FixedPoint {
 }
 
 export interface BalanceNat {
+  x: BigNumber;
+  y: BigNumber;
+}
+
+export interface BalanceNatx128 {
   x: BigNumber;
   y: BigNumber;
 }
@@ -26,4 +31,5 @@ export interface PoolStorage {
   constants: {
     tick_spacing: BigNumber;
   };
+  positions: MichelsonMap<any, any>;
 }
