@@ -37,8 +37,6 @@ export interface SetPositionOptions {
 }
 
 export abstract class Position {
-  constructor() {}
-
   /**
    * Builds transaction params for setting a new position in a Plenty v3 pool.
    * If tick spacing is not respected, the given ticks are readjusted based on the pool's spacing.

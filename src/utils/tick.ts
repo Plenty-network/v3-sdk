@@ -5,8 +5,6 @@ import { FixedPoint } from "../types";
 import { NEGATIVE_LADDER, POSITIVE_LADDER, Q80 } from "./constants";
 
 export abstract class Tick {
-  constructor() {}
-
   /**
    * Computes greatest tick less than or equals to the provided tick based on the spacing
    * @param tick The tick to be adjusted
@@ -25,11 +23,11 @@ export abstract class Tick {
 
     // Following the recursive logic as in the contract for consistency
     function halfBpsPowRec(tick: number, acc: FixedPoint, ladderKey: number): FixedPoint {
-      if (tick == 0) {
+      if (tick === 0) {
         return acc;
       } else {
         const [half, rem] = Math2.euclideanDivision(tick, 2);
-        if (rem == 0) {
+        if (rem === 0) {
           return halfBpsPowRec(half, acc, ladderKey + 1);
         } else {
           const newAcc = Math2.fixedPointMul(acc, ladder[ladderKey]);
