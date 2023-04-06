@@ -58,3 +58,11 @@ export const NEGATIVE_LADDER: Ladder = {
   18: { v: new BigNumber("20592303012757789234393034"), offset: -103 },
   19: { v: new BigNumber("1370156647050591448120178"), offset: -118 },
 };
+
+// Tick spacing to initial price boundary range
+export const SPACE_TO_RANGE: { [key: number]: number } = {
+  1: 10,
+  10: 100,
+  60: 200,
+  200: 500,
+};

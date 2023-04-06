@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js";
-import { TransferParams, DefaultContractType, WalletContract } from "@taquito/taquito";
+import { TransferParams } from "@taquito/taquito";
+import { Contract } from "../types";
 
 export interface ApproveFA12Options {
   spender: string;
@@ -21,7 +22,7 @@ export abstract class Token {
    * @param options parameters for TZIP-7 `approve` EP
    * @returns
    */
-  static approveFA12(token: DefaultContractType | WalletContract, options: ApproveFA12Options): TransferParams {
+  static approveFA12(token: Contract, options: ApproveFA12Options): TransferParams {
     try {
       return token.methodsObject.approve(options).toTransferParams();
     } catch (err) {
@@ -35,10 +36,7 @@ export abstract class Token {
    * @param options parameters for TZIP-12 `update_operators` EP
    * @returns
    */
-  static updateOperatorsFA2(
-    token: DefaultContractType | WalletContract,
-    options: UpdateOperatorFA2Options
-  ): TransferParams {
+  static updateOperatorsFA2(token: Contract, options: UpdateOperatorFA2Options): TransferParams {
     try {
       return token.methodsObject.update_operators(options).toTransferParams();
     } catch (err) {

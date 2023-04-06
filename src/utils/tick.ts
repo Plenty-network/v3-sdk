@@ -2,7 +2,8 @@ import BigNumber from "bignumber.js";
 
 import { Math2 } from "./math2";
 import { FixedPoint } from "../types";
-import { NEGATIVE_LADDER, POSITIVE_LADDER, Q80 } from "./constants";
+import { MAX_TICK, NEGATIVE_LADDER, POSITIVE_LADDER, Q80 } from "./constants";
+import { Price } from "./price";
 
 export abstract class Tick {
   /**
@@ -11,7 +12,10 @@ export abstract class Tick {
    * @param space Tickspacing of the pool
    */
   static nearestUsableTick(tick: number, space: number): number {
-    return Math.floor(tick / space) * space;
+    const roundedTick = Math.round(tick / space) * space;
+    if (roundedTick < -MAX_TICK) return roundedTick + space;
+    else if (roundedTick > MAX_TICK) return roundedTick - space;
+    return roundedTick;
   }
 
   /**
@@ -54,5 +58,14 @@ export abstract class Tick {
 
     // Adjust to nearest tick space
     return this.nearestUsableTick(tick, tickSpace);
+  }
+
+  /**
+   * Computes the real price Y/X for a provided tick.
+   * The price is not scaled based on token decimals.
+   * @param tick Tick for which the price is to be computed
+   */
+  static computeRealPriceFromTick(tick: number): BigNumber {
+    return Price.computeRealPriceFromSqrtPrice(this.computeSqrtPriceFromTick(tick));
   }
 }

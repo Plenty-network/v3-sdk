@@ -37,8 +37,8 @@ test("position - sets a new position in both token x and y", async () => {
   const liquidity = Liquidity.computeLiquidityFromAmount(
     maximumTokensContributed,
     sqrtPriceCx80,
-    sqrtPriceAx80,
-    sqrtPriceBx80
+    Tick.computeSqrtPriceFromTick(lowerTickIndex),
+    Tick.computeSqrtPriceFromTick(upperTickIndex)
   );
 
   const setPositionOptions: SetPositionOptions = {
@@ -51,7 +51,7 @@ test("position - sets a new position in both token x and y", async () => {
     deadline: Math.floor(new Date().getTime() / 1000) + 9000,
   };
 
-  const setPositionTransferParams = await Position.setPositionOp(pool, setPositionOptions);
+  const setPositionTransferParams = Position.setPositionOp(pool, setPositionOptions);
 
   const op = await tezos.contract
     .batch([
@@ -115,8 +115,8 @@ test("position - sets a new position only in token x", async () => {
   const liquidity = Liquidity.computeLiquidityFromAmount(
     maximumTokensContributed,
     sqrtPriceCx80,
-    sqrtPriceAx80,
-    sqrtPriceBx80
+    Tick.computeSqrtPriceFromTick(lowerTickIndex),
+    Tick.computeSqrtPriceFromTick(upperTickIndex)
   );
 
   const setPositionOptions: SetPositionOptions = {
@@ -129,7 +129,7 @@ test("position - sets a new position only in token x", async () => {
     deadline: Math.floor(new Date().getTime() / 1000) + 9000,
   };
 
-  const setPositionTransferParams = await Position.setPositionOp(pool, setPositionOptions);
+  const setPositionTransferParams = Position.setPositionOp(pool, setPositionOptions);
 
   const op = await tezos.contract
     .batch([
@@ -193,8 +193,8 @@ test("position - sets a new position only in token y", async () => {
   const liquidity = Liquidity.computeLiquidityFromAmount(
     maximumTokensContributed,
     sqrtPriceCx80,
-    sqrtPriceAx80,
-    sqrtPriceBx80
+    Tick.computeSqrtPriceFromTick(lowerTickIndex),
+    Tick.computeSqrtPriceFromTick(upperTickIndex)
   );
 
   const setPositionOptions: SetPositionOptions = {
@@ -207,7 +207,7 @@ test("position - sets a new position only in token y", async () => {
     deadline: Math.floor(new Date().getTime() / 1000) + 9000,
   };
 
-  const setPositionTransferParams = await Position.setPositionOp(pool, setPositionOptions);
+  const setPositionTransferParams = Position.setPositionOp(pool, setPositionOptions);
 
   const op = await tezos.contract
     .batch([
