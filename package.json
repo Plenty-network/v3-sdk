@@ -1,5 +1,5 @@
 {
-  "name": "@plentyswap/v3-sdk",
+  "name": "@plenty-labs/v3-sdk",
   "description": "An SDK to interact with Plenty's segmented CFMM",
   "version": "1.0.0",
   "license": "MIT",
