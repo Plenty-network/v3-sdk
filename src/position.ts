@@ -102,7 +102,7 @@ export abstract class Position {
 
   /**
    * Builds transaction params for updating and existing position in a Plenty v3 pool.
-   * @param pool  A taquito contract instance of the pool in which the position exists
+   * @param pool A taquito contract instance of the pool in which the position exists
    * @param options Mandatory options for updating a new position
    */
   static updatePositionOp(pool: Contract, options: UpdatePositionOptions): TransferParams {

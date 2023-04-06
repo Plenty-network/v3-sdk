@@ -8,15 +8,11 @@ export class Pool {
   currTickIndex: number;
   tickSpacing: number;
   sqrtPrice: BigNumber;
-  tokenX: Token;
-  tokenY: Token;
 
   constructor(currTickIndex: number, tickSpacing: number, sqrtPrice: BigNumber, tokenX: Token, tokenY: Token) {
     this.currTickIndex = currTickIndex;
     this.tickSpacing = tickSpacing;
     this.sqrtPrice = sqrtPrice;
-    this.tokenX = tokenX;
-    this.tokenY = tokenY;
   }
 
   /**
@@ -32,6 +28,13 @@ export class Pool {
       this.tickSpacing
     );
     return [lowerTickIndex, upperTickIndex];
+  }
+
+  /**
+   * Computes the tick boundaries for a full range position
+   */
+  getFullRangeBoundaries(): [number, number] {
+    return [Tick.nearestUsableTick(-MAX_TICK, this.tickSpacing), Tick.nearestUsableTick(MAX_TICK, this.tickSpacing)];
   }
 
   /**
