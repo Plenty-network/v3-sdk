@@ -1,7 +1,6 @@
 import BigNumber from "bignumber.js";
 
 import { Liquidity, Tick } from "../utils";
-import { Token } from "../types";
 import { SPACE_TO_RANGE, MAX_TICK } from "../utils";
 
 export class Pool {
@@ -9,7 +8,7 @@ export class Pool {
   tickSpacing: number;
   sqrtPrice: BigNumber;
 
-  constructor(currTickIndex: number, tickSpacing: number, sqrtPrice: BigNumber, tokenX: Token, tokenY: Token) {
+  constructor(currTickIndex: number, tickSpacing: number, sqrtPrice: BigNumber) {
     this.currTickIndex = currTickIndex;
     this.tickSpacing = tickSpacing;
     this.sqrtPrice = sqrtPrice;

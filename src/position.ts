@@ -1,8 +1,7 @@
 import BigNumber from "bignumber.js";
 import { TransferParams } from "@taquito/taquito";
 
-import { Tick } from "./utils";
-import { BalanceNat, Contract, PoolStorage } from "./types";
+import { BalanceNat, Contract } from "./types";
 
 export interface SetPositionOptions {
   /**
