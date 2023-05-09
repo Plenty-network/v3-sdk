@@ -23,11 +23,7 @@ export abstract class Token {
    * @returns
    */
   static approveFA12(token: Contract, options: ApproveFA12Options): TransferParams {
-    try {
-      return token.methodsObject.approve(options).toTransferParams();
-    } catch (err) {
-      throw err;
-    }
+    return token.methodsObject.approve(options).toTransferParams();
   }
 
   /**
@@ -37,10 +33,6 @@ export abstract class Token {
    * @returns
    */
   static updateOperatorsFA2(token: Contract, options: UpdateOperatorFA2Options): TransferParams {
-    try {
-      return token.methodsObject.update_operators(options).toTransferParams();
-    } catch (err) {
-      throw err;
-    }
+    return token.methodsObject.update_operators(options).toTransferParams();
   }
 }

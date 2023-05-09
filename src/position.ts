@@ -79,24 +79,20 @@ export abstract class Position {
    * @param options Mandatory options for setting up a new position
    */
   static setPositionOp(pool: Contract, options: SetPositionOptions): TransferParams {
-    try {
-      return pool.methodsObject
-        .set_position({
-          lower_tick_index: options.lowerTickIndex,
-          upper_tick_index: options.upperTickIndex,
-          lower_tick_witness: options.lowerTickWitness,
-          upper_tick_witness: options.upperTickWitness,
-          liquidity: options.liquidity.decimalPlaces(0),
-          deadline: options.deadline,
-          maximum_tokens_contributed: {
-            x: options.maximumTokensContributed.x.decimalPlaces(0),
-            y: options.maximumTokensContributed.y.decimalPlaces(0),
-          },
-        })
-        .toTransferParams();
-    } catch (err) {
-      throw err;
-    }
+    return pool.methodsObject
+      .set_position({
+        lower_tick_index: options.lowerTickIndex,
+        upper_tick_index: options.upperTickIndex,
+        lower_tick_witness: options.lowerTickWitness,
+        upper_tick_witness: options.upperTickWitness,
+        liquidity: options.liquidity.decimalPlaces(0),
+        deadline: options.deadline,
+        maximum_tokens_contributed: {
+          x: options.maximumTokensContributed.x.decimalPlaces(0),
+          y: options.maximumTokensContributed.y.decimalPlaces(0),
+        },
+      })
+      .toTransferParams();
   }
 
   /**
