@@ -19,7 +19,6 @@ export abstract class Price {
    * @param sqrtPricex80 The sqrt price that is to be converted
    */
   static computeRealPriceFromSqrtPrice(sqrtPricex80: BigNumber): BigNumber {
-    // Right shift by 80 + 1 to account for squaring to get the real price
-    return Math2.bitShift(sqrtPricex80, 81);
+    return Math2.bitShift(sqrtPricex80, 80).pow(2);
   }
 }
