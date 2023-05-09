@@ -1,3 +1,3 @@
 export * from "./utils";
-export * from "./position";
+export * from "./positionManager";
 export * from "./entities";

@@ -8,6 +8,8 @@ BigNumber.config({ EXPONENTIAL_AT: 540, ROUNDING_MODE: BigNumber.ROUND_FLOOR });
 // Divisor / multipler for numbers of precision 2^80
 export const Q80 = new BigNumber(2).pow(80);
 
+export const ZERO_VAL = new BigNumber(0);
+
 // The possible tick (-ve or +ve)
 export const MAX_TICK = 1048575;
 

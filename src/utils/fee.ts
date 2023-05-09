@@ -1,3 +1,5 @@
+import BigNumber from "bignumber.js";
+
 import { Math2 } from "./math2";
 import { BalanceNat, BalanceNatx128 } from "../types";
 
@@ -36,6 +38,11 @@ export interface ComputePositionFeeOptions {
    * Tick at lower price boundary of the position
    */
   upperTickIndex: number;
+
+  /**
+   * Liquidity of the position
+   */
+  liquidity: BigNumber;
 }
 
 export abstract class Fee {
@@ -71,8 +78,8 @@ export abstract class Fee {
     };
 
     return {
-      x: Math2.bitShift(tickRangeFees.x.minus(options.positionInsideLast.x), 128),
-      y: Math2.bitShift(tickRangeFees.y.minus(options.positionInsideLast.y), 128),
+      x: Math2.bitShift(tickRangeFees.x.minus(options.positionInsideLast.x).multipliedBy(options.liquidity), 128),
+      y: Math2.bitShift(tickRangeFees.y.minus(options.positionInsideLast.y).multipliedBy(options.liquidity), 128),
     };
   }
 }

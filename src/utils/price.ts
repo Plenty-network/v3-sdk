@@ -13,7 +13,7 @@ export abstract class Price {
   }
 
   /**
-   * Computes Y per X from sqrt price.
+   * Computes real price (tokenY / tokenX) or (tokenX / tokenY)
    * This does not consider the granularity scaling. To get scaled values the decimals
    * need to be multiplied
    * @param sqrtPricex80 The sqrt price that is to be converted

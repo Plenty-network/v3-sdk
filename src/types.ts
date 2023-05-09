@@ -3,6 +3,12 @@ import { DefaultContractType, MichelsonMap, WalletContract } from "@taquito/taqu
 
 export type Contract = DefaultContractType | WalletContract;
 
+export interface Token {
+  address: string;
+  standard: string;
+  decimals: number;
+}
+
 export interface FixedPoint {
   v: BigNumber;
   offset: number;

@@ -16,7 +16,7 @@ export abstract class Math2 {
       x1 = x0.plus(val.dividedBy(x0)).dividedBy(2);
     }
 
-    return x1;
+    return this.floor(x1);
   }
 
   /**
@@ -44,7 +44,7 @@ export abstract class Math2 {
    */
   static bitShift(num: BigNumber, places: number): BigNumber {
     if (places > 0) {
-      return num.dividedBy(new BigNumber(2).pow(places));
+      return this.floor(num.dividedBy(new BigNumber(2).pow(places)));
     } else {
       return num.multipliedBy(new BigNumber(2).pow(Math.abs(places)));
     }
@@ -56,6 +56,15 @@ export abstract class Math2 {
    */
   static ceil(num: BigNumber): BigNumber {
     const BN = BigNumber.clone({ ROUNDING_MODE: BigNumber.ROUND_CEIL });
+    return new BN(num).decimalPlaces(0);
+  }
+
+  /**
+   * Floors a given BigNumber
+   * @param num BigNumber to be floored
+   */
+  static floor(num: BigNumber): BigNumber {
+    const BN = BigNumber.clone({ ROUNDING_MODE: BigNumber.ROUND_FLOOR });
     return new BN(num).decimalPlaces(0);
   }
 }

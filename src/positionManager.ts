@@ -1,6 +1,7 @@
 import BigNumber from "bignumber.js";
 import { TransferParams } from "@taquito/taquito";
 
+import { ZERO_VAL } from "./utils";
 import { BalanceNat, Contract } from "./types";
 
 export interface SetPositionOptions {
@@ -72,7 +73,29 @@ export interface UpdatePositionOptions {
   maximumTokensContributed: BalanceNat;
 }
 
-export abstract class Position {
+export interface CollectFeeOptions {
+  /**
+   * Big-map key id of the position being updated
+   */
+  positionId: number;
+
+  /**
+   * address to which collected fee in token x must be sent
+   */
+  toX: string;
+
+  /**
+   * address to which collected fee in token y must be sent
+   */
+  toY: string;
+
+  /**
+   * Timestamp post which the fee collection transaction will be rejected by the pool
+   */
+  deadline: number;
+}
+
+export abstract class PositionManager {
   /**
    * Builds transaction params for setting a new position in a Plenty v3 pool.
    * @param pool A taquito contract instance of the pool in which liquidity is being added to
@@ -114,5 +137,18 @@ export abstract class Position {
         },
       })
       .toTransferParams();
+  }
+
+  /**
+   * Builds transaction params for collecting fees from an existing position
+   * @param pool A taquito contract instance of the pool in which the position exists
+   * @param options Mandatory options for collecting the fees of a position
+   */
+  static collectFeesOp(pool: Contract, options: CollectFeeOptions): TransferParams {
+    return this.updatePositionOp(pool, {
+      ...options,
+      liquidityDelta: ZERO_VAL,
+      maximumTokensContributed: { x: ZERO_VAL, y: ZERO_VAL },
+    });
   }
 }
