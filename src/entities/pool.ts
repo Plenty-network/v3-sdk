@@ -19,23 +19,18 @@ export class Pool {
   }
 
   /**
-   * Computes price Y / X scaled based on token decimals
+   * Computes real price Y / X i.e quote in X
    */
   getRealPriceTokenY(): BigNumber {
-    return Price.computeRealPriceFromSqrtPrice(this.sqrtPrice)
-      .multipliedBy(10 ** this.tokenX.decimals)
-      .dividedBy(10 ** this.tokenY.decimals);
+    return Price.computeRealPriceFromSqrtPrice(this.sqrtPrice, this.tokenX, this.tokenY);
   }
 
   /**
-   * Computes price X / Y scaled based on token decimals
+   * Computes real price X / Y i.e quote in token Y
    */
   getRealPriceTokenX(): BigNumber {
     // Not very precise, but serves the purpose of calculating a user readable real price
-    return new BigNumber(1)
-      .dividedBy(Price.computeRealPriceFromSqrtPrice(this.sqrtPrice))
-      .multipliedBy(10 ** this.tokenY.decimals)
-      .dividedBy(10 ** this.tokenX.decimals);
+    return new BigNumber(1).dividedBy(Price.computeRealPriceFromSqrtPrice(this.sqrtPrice, this.tokenX, this.tokenY));
   }
 
   /**

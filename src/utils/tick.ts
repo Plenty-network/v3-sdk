@@ -1,9 +1,9 @@
 import BigNumber from "bignumber.js";
 
 import { Math2 } from "./math2";
-import { FixedPoint } from "../types";
-import { MAX_TICK, NEGATIVE_LADDER, POSITIVE_LADDER, Q80 } from "./constants";
 import { Price } from "./price";
+import { FixedPoint, Token } from "../types";
+import { MAX_TICK, NEGATIVE_LADDER, POSITIVE_LADDER, Q80 } from "./constants";
 
 export abstract class Tick {
   /**
@@ -61,11 +61,12 @@ export abstract class Tick {
   }
 
   /**
-   * Computes the real price Y/X for a provided tick.
-   * The price is not scaled based on token decimals.
-   * @param tick Tick for which the price is to be computed
+   * Computes real price (Y / X) at a given tick
+   * @param tick The tick index at which the real price is to be calculated
+   * @param tokenX base token
+   * @param tokenY quote token
    */
-  static computeRealPriceFromTick(tick: number): BigNumber {
-    return Price.computeRealPriceFromSqrtPrice(this.computeSqrtPriceFromTick(tick));
+  static computeRealPriceFromTick(tick: number, tokenX: Token, tokenY: Token): BigNumber {
+    return Price.computeRealPriceFromSqrtPrice(this.computeSqrtPriceFromTick(tick), tokenX, tokenY);
   }
 }

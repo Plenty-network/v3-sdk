@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 
 import { Math2 } from "./math2";
-import { BalanceNat } from "../types";
+import { BalanceNat, Token } from "../types";
 
 export abstract class Price {
   /**
@@ -13,12 +13,15 @@ export abstract class Price {
   }
 
   /**
-   * Computes real price (tokenY / tokenX) or (tokenX / tokenY)
-   * This does not consider the granularity scaling. To get scaled values the decimals
-   * need to be multiplied
-   * @param sqrtPricex80 The sqrt price that is to be converted
+   * Computes real price (Y / X) through sqrt price (Y / X)
+   * @param sqrtPricex80 sqrt price (Y / X)
+   * @param tokenX base token
+   * @param tokenY quote token
    */
-  static computeRealPriceFromSqrtPrice(sqrtPricex80: BigNumber): BigNumber {
-    return Math2.bitShift(sqrtPricex80, 80).pow(2);
+  static computeRealPriceFromSqrtPrice(sqrtPricex80: BigNumber, tokenX: Token, tokenY: Token): BigNumber {
+    return Math2.bitShift(sqrtPricex80, 80)
+      .pow(2)
+      .multipliedBy(10 ** tokenX.decimals)
+      .dividedBy(10 ** tokenY.decimals);
   }
 }

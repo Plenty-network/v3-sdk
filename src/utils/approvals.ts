@@ -15,7 +15,7 @@ export interface OperatorKey {
 
 export type UpdateOperatorFA2Options = Array<{ [key: string]: OperatorKey }>;
 
-export abstract class Token {
+export abstract class Approvals {
   /**
    * Builds transaction params for token approval call to an FA1.2 token contract
    * @param token Taquito contract instance of an FA1.2 contract
