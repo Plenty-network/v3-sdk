@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 
 import { Math2 } from "./math2";
-import { BalanceNat, Token } from "../types";
+import { BalanceNat } from "../types";
 
 export abstract class Price {
   /**
@@ -18,10 +18,14 @@ export abstract class Price {
    * @param tokenX base token
    * @param tokenY quote token
    */
-  static computeRealPriceFromSqrtPrice(sqrtPricex80: BigNumber, tokenX: Token, tokenY: Token): BigNumber {
+  static computeRealPriceFromSqrtPrice(
+    sqrtPricex80: BigNumber,
+    tokenXDecimals: number,
+    tokenYDecimals: number
+  ): BigNumber {
     return Math2.bitShift(sqrtPricex80, 80)
       .pow(2)
-      .multipliedBy(10 ** tokenX.decimals)
-      .dividedBy(10 ** tokenY.decimals);
+      .multipliedBy(10 ** tokenXDecimals)
+      .dividedBy(10 ** tokenYDecimals);
   }
 }

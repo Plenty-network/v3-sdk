@@ -22,7 +22,7 @@ export class Pool {
    * Computes real price Y / X i.e quote in X
    */
   getRealPriceTokenY(): BigNumber {
-    return Price.computeRealPriceFromSqrtPrice(this.sqrtPrice, this.tokenX, this.tokenY);
+    return Price.computeRealPriceFromSqrtPrice(this.sqrtPrice, this.tokenX.decimals, this.tokenY.decimals);
   }
 
   /**
@@ -30,7 +30,9 @@ export class Pool {
    */
   getRealPriceTokenX(): BigNumber {
     // Not very precise, but serves the purpose of calculating a user readable real price
-    return new BigNumber(1).dividedBy(Price.computeRealPriceFromSqrtPrice(this.sqrtPrice, this.tokenX, this.tokenY));
+    return new BigNumber(1).dividedBy(
+      Price.computeRealPriceFromSqrtPrice(this.sqrtPrice, this.tokenX.decimals, this.tokenY.decimals)
+    );
   }
 
   /**

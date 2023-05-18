@@ -44,7 +44,7 @@ export abstract class Math2 {
    */
   static bitShift(num: BigNumber, places: number): BigNumber {
     if (places > 0) {
-      return this.floor(num.dividedBy(new BigNumber(2).pow(places)));
+      return num.dividedBy(new BigNumber(2).pow(places));
     } else {
       return num.multipliedBy(new BigNumber(2).pow(Math.abs(places)));
     }

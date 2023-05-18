@@ -3,9 +3,15 @@ import { DefaultContractType, MichelsonMap, WalletContract } from "@taquito/taqu
 
 export type Contract = DefaultContractType | WalletContract;
 
+export enum TokenStandard {
+  FA12 = "FA1.2",
+  FA2 = "FA2",
+}
+
 export interface Token {
   address: string;
-  standard: string;
+  tokenId?: number;
+  standard: TokenStandard;
   decimals: number;
 }
 
