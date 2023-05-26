@@ -67,6 +67,6 @@ export abstract class Tick {
    * @param tokenY quote token
    */
   static computeRealPriceFromTick(tick: number, tokenX: Token, tokenY: Token): BigNumber {
-    return Price.computeRealPriceFromSqrtPrice(this.computeSqrtPriceFromTick(tick), tokenX, tokenY);
+    return Price.computeRealPriceFromSqrtPrice(this.computeSqrtPriceFromTick(tick), tokenX.decimals, tokenY.decimals);
   }
 }
