@@ -15,7 +15,7 @@ export abstract class Price {
     tokenYDecimals: number
   ): BigNumber {
     return Math2.sqrt(
-      Math2.bitShift(realPrice.multipliedBy(10 ** tokenYDecimals).decimalPlaces(10 ** tokenXDecimals), -160)
+      Math2.bitShift(realPrice.multipliedBy(10 ** tokenYDecimals).dividedBy(10 ** tokenXDecimals), -160)
     );
   }
 
