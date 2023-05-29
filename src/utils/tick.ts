@@ -69,4 +69,18 @@ export abstract class Tick {
   static computeRealPriceFromTick(tick: number, tokenX: Token, tokenY: Token): BigNumber {
     return Price.computeRealPriceFromSqrtPrice(this.computeSqrtPriceFromTick(tick), tokenX.decimals, tokenY.decimals);
   }
+
+  /**
+   * Computes the tick for a  real price (Y / X)
+   * @param realPrice real price Y / X scaled to decimals
+   * @param tokenX base token
+   * @param tokenY quote token
+   * @param tickSpace tick space of the pool
+   */
+  static computeTickFromRealPrice(realPrice: BigNumber, tokenX: Token, tokenY: Token, tickSpace: number): number {
+    return this.computeTickFromSqrtPrice(
+      Price.computeSqrtPriceFromRealPrice(realPrice, tokenX.decimals, tokenY.decimals),
+      tickSpace
+    );
+  }
 }
