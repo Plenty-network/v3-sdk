@@ -1,5 +1,5 @@
 {
-  "include": ["src"],
+  "include": ["src", "__test__/pool.test.ts"],
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],

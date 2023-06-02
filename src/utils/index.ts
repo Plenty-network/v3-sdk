@@ -5,3 +5,4 @@ export * from "./tick";
 export * from "./approvals";
 export * from "./fee";
 export * from "./price";
+export * from "./swap";

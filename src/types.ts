@@ -34,6 +34,14 @@ export interface Ladder {
   [key: number]: FixedPoint;
 }
 
+export interface TickElement {
+  index: number;
+  prevIndex: number;
+  nextIndex: number;
+  sqrtPrice: BigNumber;
+  liquidityNet: BigNumber;
+}
+
 // Fields not accessed in the SDK are not included in the type
 export interface PoolStorage {
   liquidity: BigNumber;
