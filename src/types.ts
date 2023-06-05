@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
-import { DefaultContractType, MichelsonMap, WalletContract } from "@taquito/taquito";
+import { ContractAbstraction, DefaultContractType, MichelsonMap, Wallet, WalletContract } from "@taquito/taquito";
 
-export type Contract = DefaultContractType | WalletContract;
+export type Contract = DefaultContractType | WalletContract | ContractAbstraction<Wallet>;
 
 export interface FixedPoint {
   v: BigNumber;
