@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 
-import { Pool, TickElement, TokenStandard, ZERO_VAL } from "../dist";
+import { Pool, TickElement, ZERO_VAL } from "../dist";
 
 describe("swap estimation", () => {
   const ticks: { [key: string]: TickElement } = {
@@ -28,8 +28,6 @@ describe("swap estimation", () => {
   };
 
   const pool = new Pool(
-    { address: "", standard: TokenStandard.FA12, decimals: 18 },
-    { address: "", standard: TokenStandard.FA12, decimals: 6 },
     -275611,
     -275730,
     10,

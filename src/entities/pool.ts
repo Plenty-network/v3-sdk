@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 
-import { TickElement, Token } from "../types";
-import { Liquidity, Price, Tick, SPACE_TO_RANGE, MAX_TICK, Math2, Swap, ZERO_VAL } from "../utils";
+import { TickElement } from "../types";
+import { Liquidity, Tick, SPACE_TO_RANGE, MAX_TICK, Math2, Swap, ZERO_VAL } from "../utils";
 
 interface EstimateStep {
   storage: {
@@ -15,8 +15,6 @@ interface EstimateStep {
 }
 
 export class Pool {
-  public readonly tokenX: Token;
-  public readonly tokenY: Token;
   public readonly currTickIndex: number;
   public readonly currTickWitness: number;
   public readonly tickSpacing: number;
@@ -25,8 +23,6 @@ export class Pool {
   public readonly liquidity: BigNumber;
 
   constructor(
-    tokenX: Token,
-    tokenY: Token,
     currTickIndex: number,
     currentTickWitness: number,
     tickSpacing: number,
@@ -34,31 +30,12 @@ export class Pool {
     feeBps: number,
     liquidity: BigNumber
   ) {
-    this.tokenX = tokenX;
-    this.tokenY = tokenY;
     this.currTickIndex = currTickIndex;
     this.currTickWitness = currentTickWitness;
     this.tickSpacing = tickSpacing;
     this.sqrtPrice = sqrtPrice;
     this.feeBps = feeBps;
     this.liquidity = liquidity;
-  }
-
-  /**
-   * Computes real price with Y as quote
-   */
-  getRealPriceTokenY(): BigNumber {
-    // Not very precise, but serves the purpose of calculating a user readable real price
-    return new BigNumber(1).dividedBy(
-      Price.computeRealPriceFromSqrtPrice(this.sqrtPrice, this.tokenX.decimals, this.tokenY.decimals)
-    );
-  }
-
-  /**
-   * Computes real price with X as quote
-   */
-  getRealPriceTokenX(): BigNumber {
-    return Price.computeRealPriceFromSqrtPrice(this.sqrtPrice, this.tokenX.decimals, this.tokenY.decimals);
   }
 
   /**
