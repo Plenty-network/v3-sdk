@@ -1,7 +1,7 @@
 {
   "name": "@plenty-labs/v3-sdk",
   "description": "An SDK to interact with Plenty's segmented CFMM",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "license": "MIT",
   "repository": "https://github.com/Plenty-network/v3-sdk.git",
   "keywords": [
