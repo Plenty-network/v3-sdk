@@ -30,7 +30,8 @@ export abstract class Price {
     tokenXDecimals: number,
     tokenYDecimals: number
   ): BigNumber {
-    return Math2.bitShift(sqrtPricex80, 80)
+    return sqrtPricex80
+      .dividedBy(new BigNumber(2).pow(80))
       .pow(2)
       .multipliedBy(10 ** tokenXDecimals)
       .dividedBy(10 ** tokenYDecimals);
