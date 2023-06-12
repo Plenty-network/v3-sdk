@@ -41,3 +41,10 @@ export interface PoolStorage {
   };
   positions: MichelsonMap<any, any>;
 }
+
+export interface Incentive {
+  startTime: number; // Timestamp
+  endTime: number; // Timestamp
+  totalRewardUnclaimed: BigNumber;
+  totalSecondsClaimed: BigNumber;
+}
