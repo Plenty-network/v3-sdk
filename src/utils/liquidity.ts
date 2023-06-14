@@ -50,10 +50,12 @@ export abstract class Liquidity {
 
     // Liquidity in terms of token x amount
     // Derived from: dX = dL(1/sqrt(Pa) - 1/sqrt(Pb))
-    return amount
-      .multipliedBy(sqrtPriceAx80)
-      .multipliedBy(sqrtPriceBx80)
-      .dividedBy(sqrtPriceBx80.minus(sqrtPriceAx80).multipliedBy(Q80));
+    return Math2.floor(
+      amount
+        .multipliedBy(sqrtPriceAx80)
+        .multipliedBy(sqrtPriceBx80)
+        .dividedBy(sqrtPriceBx80.minus(sqrtPriceAx80).multipliedBy(Q80))
+    );
   }
 
   /**
@@ -69,7 +71,7 @@ export abstract class Liquidity {
 
     // Liquidity in terms of token y amount
     // Derived from: dY = dL(sqrt(Pb) - sqrt(pa))
-    return amount.multipliedBy(Q80).dividedBy(sqrtPriceBx80.minus(sqrtPriceAx80));
+    return Math2.floor(amount.multipliedBy(Q80).dividedBy(sqrtPriceBx80.minus(sqrtPriceAx80)));
   }
 
   /**
