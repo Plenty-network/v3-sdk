@@ -28,25 +28,24 @@ export abstract class Swap {
   }
 
   /**
-   * Computes the new tick after
+   * Computes the new tick after a swap
    * @param currTickIndex Index the present swap step
    * @param oldSqrtPrice Old price before swap
    * @param newSqrtPrice Price after swap step
    */
   static calcNewCurrTickIndex(currTickIndex: number, oldSqrtPrice: BigNumber, newSqrtPrice: BigNumber): number {
-    function fixCurrTickIndex(currTickIndex: number, sqrtPriceNew: BigNumber): number {
-      const currIndexSqrtPrice = Tick.computeSqrtPriceFromTick(currTickIndex);
-      if (sqrtPriceNew.isLessThan(currIndexSqrtPrice)) {
-        const prevTickIndex = currTickIndex - 1;
+    function fixCurrTickIndex(currTickIndexNew: number, currTickIndexPrice: BigNumber): number {
+      if (newSqrtPrice.isLessThan(currTickIndexPrice)) {
+        const prevTickIndex = currTickIndexNew - 1;
         const prevIndexSqrtPrice = Tick.computeSqrtPriceFromTick(prevTickIndex);
         return fixCurrTickIndex(prevTickIndex, prevIndexSqrtPrice);
       } else {
-        const nextTickIndex = currTickIndex + 1;
+        const nextTickIndex = currTickIndexNew + 1;
         const nextIndexSqrtPrice = Tick.computeSqrtPriceFromTick(nextTickIndex);
-        if (nextIndexSqrtPrice.isLessThan(newSqrtPrice)) {
-          return fixCurrTickIndex(newTickIndex, nextIndexSqrtPrice);
+        if (nextIndexSqrtPrice.isLessThanOrEqualTo(newSqrtPrice)) {
+          return fixCurrTickIndex(nextTickIndex, nextIndexSqrtPrice);
         } else {
-          return currTickIndex;
+          return currTickIndexNew;
         }
       }
     }

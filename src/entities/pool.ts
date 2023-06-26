@@ -124,11 +124,13 @@ export class Pool {
         } else {
           const fee = Math2.ceil(step.dx.multipliedBy(this.feeBps).dividedBy(10000));
           const sqrtPriceNew = Swap.sqrtPriceMoveX(step.storage.sqrtPrice, step.dx.minus(fee), step.storage.liquidity);
+
           const currTickIndexNew = Swap.calcNewCurrTickIndex(
             step.storage.currTickIndex,
             step.storage.sqrtPrice,
             sqrtPriceNew
           );
+          console.log("Here");
           if (currTickIndexNew >= step.storage.currTickWitness) {
             const dy = Math2.bitShift(
               step.storage.sqrtPrice.minus(sqrtPriceNew).multipliedBy(step.storage.liquidity),
