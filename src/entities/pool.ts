@@ -130,7 +130,6 @@ export class Pool {
             step.storage.sqrtPrice,
             sqrtPriceNew
           );
-          console.log("Here");
           if (currTickIndexNew >= step.storage.currTickWitness) {
             const dy = Math2.bitShift(
               step.storage.sqrtPrice.minus(sqrtPriceNew).multipliedBy(step.storage.liquidity),
@@ -162,7 +161,7 @@ export class Pool {
                 liquidity: step.storage.liquidity.minus(tick.liquidityNet),
               },
               dx: step.dx.minus(dxConsumed),
-              dy: dy.plus(dy),
+              dy: step.dy.plus(dy),
             };
           }
         }

@@ -37,7 +37,7 @@ describe("swap estimation", () => {
   );
 
   it("swaps x to y", async () => {
-    const step = await pool.estimateSwapXToY(new BigNumber(10 ** 18), (tick: number) => {
+    const step = await pool.estimateSwapXToY(new BigNumber(10 * 10 ** 18), (tick: number) => {
       return new Promise((resolve, _) => {
         resolve(ticks[tick.toString()]);
       });
