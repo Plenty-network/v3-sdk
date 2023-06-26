@@ -154,7 +154,7 @@ export class Pool {
             const dxConsumed = dxForDy.multipliedBy(10000).dividedBy(10000 - this.feeBps);
             step = {
               storage: {
-                currTickIndex: tick.index,
+                currTickIndex: tick.index - 1,
                 currTickWitness: loTick,
                 sqrtPrice: sqrtPriceNew,
                 liquidity: step.storage.liquidity.minus(tick.liquidityNet),

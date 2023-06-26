@@ -134,6 +134,7 @@ export abstract class Liquidity {
         .multipliedBy(sqrtPriceBx80.minus(sqrtPriceAx80))
         .multipliedBy(Q80)
         .dividedBy(sqrtPriceAx80.multipliedBy(sqrtPriceBx80))
+        .abs()
     );
   }
 
@@ -153,6 +154,6 @@ export abstract class Liquidity {
     }
 
     // dX = dL(1/sqrt(Pa) - 1/sqrt(Pb))
-    return Math2.ceil(liquidity.multipliedBy(sqrtPriceBx80.minus(sqrtPriceAx80)).dividedBy(Q80));
+    return Math2.ceil(liquidity.multipliedBy(sqrtPriceBx80.minus(sqrtPriceAx80)).dividedBy(Q80)).abs();
   }
 }
