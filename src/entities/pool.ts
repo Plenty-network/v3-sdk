@@ -152,7 +152,7 @@ export class Pool {
             const dxForDy = Math2.ceil(
               Math2.bitShift(dy, -160).dividedBy(sqrtPriceNew.multipliedBy(step.storage.sqrtPrice))
             );
-            const dxConsumed = dxForDy.multipliedBy(10000).dividedBy(10000 - this.feeBps);
+            const dxConsumed = Math2.ceil(dxForDy.multipliedBy(10000).dividedBy(10000 - this.feeBps));
             step = {
               storage: {
                 currTickIndex: tick.index - 1,
@@ -224,7 +224,7 @@ export class Pool {
             const dyForDx = Math2.ceil(
               Math2.bitShift(step.storage.liquidity.multipliedBy(sqrtPriceNew.minus(step.storage.sqrtPrice)), 80)
             );
-            const dyConsumed = dyForDx.multipliedBy(10000).dividedBy(10000 - this.feeBps);
+            const dyConsumed = Math2.ceil(dyForDx.multipliedBy(10000).dividedBy(10000 - this.feeBps));
             step = {
               storage: {
                 currTickIndex: nextTick.index,
