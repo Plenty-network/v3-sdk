@@ -134,8 +134,7 @@ export abstract class Liquidity {
         .multipliedBy(sqrtPriceBx80.minus(sqrtPriceAx80))
         .multipliedBy(Q80)
         .dividedBy(sqrtPriceAx80.multipliedBy(sqrtPriceBx80))
-        .abs()
-    );
+    ).abs();
   }
 
   /**
