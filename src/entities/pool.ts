@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 
 import { TickElement } from "../types";
-import { Liquidity, Tick, SPACE_TO_RANGE, MAX_TICK, Math2, Swap, ZERO_VAL } from "../utils";
+import { Liquidity, Tick, SPACE_TO_RANGE, MAX_TICK, Math2, Swap, ZERO_VAL, Q80 } from "../utils";
 
 interface EstimateStep {
   storage: {
@@ -222,7 +222,7 @@ export class Pool {
                 .dividedBy(step.storage.sqrtPrice.multipliedBy(sqrtPriceNew))
             );
             const dyForDx = Math2.ceil(
-              Math2.bitShift(step.storage.liquidity.multipliedBy(sqrtPriceNew.minus(step.storage.sqrtPrice)), 80)
+              step.storage.liquidity.multipliedBy(sqrtPriceNew.minus(step.storage.sqrtPrice)).dividedBy(Q80)
             );
             const dyConsumed = Math2.ceil(dyForDx.multipliedBy(10000).dividedBy(10000 - this.feeBps));
             step = {
