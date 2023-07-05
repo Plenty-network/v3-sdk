@@ -25,7 +25,7 @@ export class Stake {
     const now = Math.floor(new Date().getTime() / 1000);
 
     const totalSecondsForReward =
-      (now > this.incentive.endTime ? this.incentive.endTime : now) - this.incentive.startTime;
+      (now < this.incentive.endTime ? this.incentive.endTime : now) - this.incentive.startTime;
     const totalSecondsUnclaimed = Math2.bitShift(new BigNumber(totalSecondsForReward), -128).minus(
       this.incentive.totalSecondsClaimed
     );
