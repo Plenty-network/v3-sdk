@@ -14,7 +14,7 @@ export abstract class Swap {
     const num = Math2.bitShift(liquidity.multipliedBy(currSqrtPrice), -80);
     const denom = Math2.bitShift(liquidity, -80).plus(dx.multipliedBy(currSqrtPrice));
 
-    return Math2.floor(num.dividedBy(denom));
+    return Math2.ceil(num.dividedBy(denom));
   }
 
   /**
@@ -24,7 +24,7 @@ export abstract class Swap {
    * @param liquidity Current liquidity
    */
   static sqrtPriceMoveY(currSqrtPrice: BigNumber, dy: BigNumber, liquidity: BigNumber): BigNumber {
-    return Math2.ceil(Math2.bitShift(dy, -80).dividedBy(liquidity)).plus(currSqrtPrice);
+    return Math2.floor(Math2.bitShift(dy, -80).dividedBy(liquidity)).plus(currSqrtPrice);
   }
 
   /**

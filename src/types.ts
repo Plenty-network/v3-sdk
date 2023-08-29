@@ -3,6 +3,12 @@ import { ContractAbstraction, DefaultContractType, MichelsonMap, Wallet, WalletC
 
 export type Contract = DefaultContractType | WalletContract | ContractAbstraction<Wallet>;
 
+export interface Token {
+  address: string;
+  tokenId?: number;
+  decimals: number;
+}
+
 export interface FixedPoint {
   v: BigNumber;
   offset: number;
