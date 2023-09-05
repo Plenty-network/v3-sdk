@@ -68,9 +68,10 @@ export interface UpdatePositionOptions {
   deadline: number;
 
   /**
-   * Maximum number of individual tokens contributed
+   * Maximum number of tokens contributed for addition of liquidity or
+   * minimum number of tokens received for removal of liquidity
    */
-  maximumTokensContributed: BalanceNat;
+  tokensLimit: BalanceNat;
 }
 
 export interface CollectFeeOptions {
@@ -131,9 +132,9 @@ export abstract class PositionManager {
         to_x: options.toX,
         to_y: options.toY,
         deadline: options.deadline,
-        maximum_tokens_contributed: {
-          x: options.maximumTokensContributed.x.decimalPlaces(0),
-          y: options.maximumTokensContributed.y.decimalPlaces(0),
+        tokens_limit: {
+          x: options.tokensLimit.x.decimalPlaces(0),
+          y: options.tokensLimit.y.decimalPlaces(0),
         },
       })
       .toTransferParams();
@@ -148,7 +149,7 @@ export abstract class PositionManager {
     return this.updatePositionOp(pool, {
       ...options,
       liquidityDelta: ZERO_VAL,
-      maximumTokensContributed: { x: ZERO_VAL, y: ZERO_VAL },
+      tokensLimit: { x: ZERO_VAL, y: ZERO_VAL },
     });
   }
 }
