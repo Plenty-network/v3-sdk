@@ -68,6 +68,13 @@ export class Pool {
    * @param upperTickIndex Upper tick of the price range
    */
   estimateAmountXFromY(amount: BigNumber, lowerTickIndex: number, upperTickIndex: number): BigNumber {
+    // Range validation
+    if (this.currTickIndex > upperTickIndex) {
+      return ZERO_VAL;
+    } else if (this.currTickIndex < lowerTickIndex) {
+      throw "CURRENT_TICK_BELOW_LOWER_TICK";
+    }
+
     const liquidity = Liquidity.computeLiquidityFromAmountY(
       amount,
       Tick.computeSqrtPriceFromTick(lowerTickIndex),
@@ -88,6 +95,13 @@ export class Pool {
    * @param upperTickIndex Upper tick of the price range
    */
   estimateAmountYFromX(amount: BigNumber, lowerTickIndex: number, upperTickIndex: number): BigNumber {
+    // Range validation
+    if (this.currTickIndex < lowerTickIndex) {
+      return ZERO_VAL;
+    } else if (this.currTickIndex > upperTickIndex) {
+      throw "CURRENT_TICK_ABOVE_UPPER_TICK";
+    }
+
     const liquidity = Liquidity.computeLiquidityFromAmountX(
       amount,
       this.sqrtPrice,
