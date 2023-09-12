@@ -23,7 +23,7 @@ export interface SwapXToYOptions {
   /**
    * Tezos address to which the output tokens should be sent
    */
-  recepient: string;
+  recipient: string;
 }
 
 export interface SwapYToXOptions {
@@ -46,12 +46,12 @@ export interface SwapYToXOptions {
   /**
    * Tezos address to which the output tokens should be sent
    */
-  recepient: string;
+  recipient: string;
 }
 
 export abstract class SwapPortal {
   /**
-   * Builds transaction params for perform a swap from token x to token y
+   * Builds transaction params to perform a swap from token x to token y
    * @param pool A taquito contract instance of the pool through which the swap happens
    * @param options Options for performing the token x to y swap
    */
@@ -65,13 +65,13 @@ export abstract class SwapPortal {
         dx: options.tokenXIn,
         deadline: Math.floor(options.deadline.getTime() / 1000),
         min_dy: options.minTokenYOut,
-        to_dy: options.recepient,
+        to_dy: options.recipient,
       })
       .toTransferParams();
   }
 
   /**
-   * Builds transaction params for perform a swap from token y to token x
+   * Builds transaction params to perform a swap from token y to token x
    * @param pool A taquito contract instance of the pool through which the swap happens
    * @param options Options for performing the token y to x swap
    */
@@ -85,7 +85,7 @@ export abstract class SwapPortal {
         dy: options.tokenYIn,
         deadline: Math.floor(options.deadline.getTime() / 1000),
         min_dx: options.minTokenXOut,
-        to_dx: options.recepient,
+        to_dx: options.recipient,
       })
       .toTransferParams();
   }

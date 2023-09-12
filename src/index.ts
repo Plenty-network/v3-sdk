@@ -7,3 +7,5 @@ export * from "./positionManager";
 export * from "./entities";
 export * from "./types";
 export * from "./stakeManager";
+export * from "./swapPortal";
+export * from "./poolDeployer";

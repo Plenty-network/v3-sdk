@@ -9,6 +9,19 @@ export interface Token {
   decimals: number;
 }
 
+export interface Fa12 {
+  fa12: string;
+}
+
+export interface Fa2 {
+  fa2: {
+    address: string;
+    token_id: BigNumber;
+  };
+}
+
+export type TokenOption = Fa12 | Fa2;
+
 export interface FixedPoint {
   v: BigNumber;
   offset: number;

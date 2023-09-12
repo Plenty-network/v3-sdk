@@ -65,3 +65,10 @@ export const SPACE_TO_RANGE: { [key: number]: number } = {
   60: 200,
   200: 500,
 };
+
+export const FEE_TO_SPACE: { [key: number]: number } = {
+  1: 1,
+  5: 10,
+  30: 60,
+  100: 200,
+};

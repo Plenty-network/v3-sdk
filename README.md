@@ -22,17 +22,17 @@ The SDK makes extensive use of the [Taquito](https://tezostaquito.io/) library f
 
 Here are reference scenarios to guide you in using the SDK to interact with the contracts. For an in-depth understanding of the math, you may check the README provided [here](<[https://github.com/Plenty-network/v3-sdk/tree/master/src/utils](https://github.com/Plenty-network/plentyswap-v3/blob/master/SPECIFICATION.md)>).
 
-- [Estimations](#estimations)
+- [Estimations](#⚖️-Estimations)
   - [Essential setup](#essential-setup)
   - [Swap output](#estimating-swap-output)
   - [Liquidity](#estimating-liquidity)
   - [Fees collected by a position](#estimating-fees-collected-by-a-position)
   - [Staking rewards](#estimating-unclaimed-staking-reward)
-- [Operations](#operations)
+- [Operations](#💰-operations)
   - [Performing a swap](#performing-a-swap-operation)
   - [Managing a position](#managing-a-position)
   - [Staking a position](#staking-a-position)
-- [Math Reference](#math-reference)
+- [Math Reference](#🧮-math-reference)
 
 ## ⚖️ Estimations
 
@@ -496,7 +496,7 @@ import { StakeManager, StakeOptions } from "@plenty-labs/v3-sdk";
 })();
 ```
 
-## Math reference
+## 🧮 Math reference
 
 Most of the mathematics used in the segmented CFMM is comprehensively explained in this [Specification](https://github.com/Plenty-network/plentyswap-v3/blob/master/SPECIFICATION.md). The SDK exposes two abstract classes with TypeScript utilities that mirror the mathematical operations. These utilities are valuable in various instances if you are developing on top of Plenty v3.
 

@@ -12,9 +12,12 @@ export abstract class Price {
    * @param tokenY second token in the pair
    */
   static computeSqrtPriceFromRealPrice(realPrice: BigNumber, tokenX: Token, tokenY: Token): BigNumber {
-    // Reorder tokens based on address and token-id
-    const [tx, ty] = Helpers.orderTokens(tokenX, tokenY);
-    return Math2.sqrt(Math2.bitShift(realPrice.multipliedBy(10 ** ty.decimals).dividedBy(10 ** tx.decimals), -160));
+    if (!Helpers.isCorrectOrderToken(tokenX, tokenY)) {
+      throw "INVALID_TOKEN_ORDERING";
+    }
+    return Math2.sqrt(
+      Math2.bitShift(realPrice.multipliedBy(10 ** tokenX.decimals).dividedBy(10 ** tokenY.decimals), -160)
+    );
   }
 
   /**
@@ -24,12 +27,13 @@ export abstract class Price {
    * @param tokenY second token in the pair
    */
   static computeRealPriceFromSqrtPrice(sqrtPricex80: BigNumber, tokenX: Token, tokenY: Token): BigNumber {
-    // Reorder tokens based on address and token-id
-    const [tx, ty] = Helpers.orderTokens(tokenX, tokenY);
+    if (!Helpers.isCorrectOrderToken(tokenX, tokenY)) {
+      throw "INVALID_TOKEN_ORDERING";
+    }
     return sqrtPricex80
       .dividedBy(new BigNumber(2).pow(80))
       .pow(2)
-      .multipliedBy(10 ** tx.decimals)
-      .dividedBy(10 ** ty.decimals);
+      .multipliedBy(10 ** tokenX.decimals)
+      .dividedBy(10 ** tokenY.decimals);
   }
 }

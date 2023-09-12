@@ -33,7 +33,7 @@ export interface SetPositionOptions {
   /**
    * Timestamp post which the liquidity transaction will be rejected by the pool
    */
-  deadline: number;
+  deadline?: Date;
 
   /**
    * Maximum number of individual tokens contributed
@@ -65,7 +65,7 @@ export interface UpdatePositionOptions {
   /**
    * Timestamp post which the liquidity transaction will be rejected by the pool
    */
-  deadline: number;
+  deadline?: Date;
 
   /**
    * Maximum number of tokens contributed for addition of liquidity or
@@ -93,7 +93,7 @@ export interface CollectFeeOptions {
   /**
    * Timestamp post which the fee collection transaction will be rejected by the pool
    */
-  deadline: number;
+  deadline?: Date;
 }
 
 export abstract class PositionManager {
@@ -103,6 +103,10 @@ export abstract class PositionManager {
    * @param options Mandatory options for setting up a new position
    */
   static setPositionOp(pool: Contract, options: SetPositionOptions): TransferParams {
+    if (!options.deadline) {
+      options.deadline = new Date(Date.now() + 900000); // 15 minutes
+    }
+
     return pool.methodsObject
       .set_position({
         lower_tick_index: options.lowerTickIndex,
@@ -110,7 +114,7 @@ export abstract class PositionManager {
         lower_tick_witness: options.lowerTickWitness,
         upper_tick_witness: options.upperTickWitness,
         liquidity: options.liquidity.decimalPlaces(0),
-        deadline: options.deadline,
+        deadline: Math.floor(options.deadline.getTime() / 1000),
         maximum_tokens_contributed: {
           x: options.maximumTokensContributed.x.decimalPlaces(0),
           y: options.maximumTokensContributed.y.decimalPlaces(0),
@@ -125,13 +129,17 @@ export abstract class PositionManager {
    * @param options Mandatory options for updating a new position
    */
   static updatePositionOp(pool: Contract, options: UpdatePositionOptions): TransferParams {
+    if (!options.deadline) {
+      options.deadline = new Date(Date.now() + 900000); // 15 minutes
+    }
+
     return pool.methodsObject
       .update_position({
         position_id: options.positionId,
         liquidity_delta: options.liquidityDelta.decimalPlaces(0),
         to_x: options.toX,
         to_y: options.toY,
-        deadline: options.deadline,
+        deadline: Math.floor(options.deadline.getTime() / 1000),
         tokens_limit: {
           x: options.tokensLimit.x.decimalPlaces(0),
           y: options.tokensLimit.y.decimalPlaces(0),
