@@ -1,8 +1,8 @@
 import BigNumber from "bignumber.js";
 
+import { Math2 } from "./math2";
 import { Q80 } from "./constants";
 import { BalanceNat } from "../types";
-import { Math2 } from "./math2";
 
 export abstract class Liquidity {
   /**

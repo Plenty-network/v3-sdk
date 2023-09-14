@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js";
 import { TransferParams } from "@taquito/taquito";
+
 import { Contract } from "../types";
 
 export interface ApproveFA12Options {

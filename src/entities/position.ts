@@ -61,7 +61,7 @@ export class Position {
         liquidity: this.liquidity,
       });
     } else {
-      throw "feeInsideLast not initialised";
+      throw "feeInsideLast NOT INITIALISED";
     }
   }
 }

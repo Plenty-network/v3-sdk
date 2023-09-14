@@ -2,6 +2,10 @@ import { Token } from "../types";
 
 export abstract class Helpers {
   static isCorrectOrderToken(tokenX: Token, tokenY: Token): boolean {
+    if (tokenX.address === tokenY.address && tokenX.tokenId === tokenY.tokenId) {
+      throw "SAME_TOKENS_NOT_ALLOWED";
+    }
+
     const yIsFa12 = !tokenY.tokenId && tokenX.tokenId;
     const yAddressIsSmaller = tokenY.address < tokenX.address;
     const yTokenIdIsSmaller = tokenX.address === tokenY.address && (tokenY.tokenId ?? 0) < (tokenX.tokenId ?? 0);
