@@ -14,9 +14,9 @@ You can install the SDK through npm:
 npm install @plenty-labs/v3-sdk
 ```
 
-The SDK makes extensive use of the [Taquito](https://tezostaquito.io/) library for utilities that allow for interaction with smart contracts.
+The SDK uses the [Taquito](https://tezostaquito.io/) library for utilities that allow for interaction with smart contracts.
 
-[Make reference to Plenty API to fetch contract addresses]
+You may also find it beneficial to make extensive use of [Plenty's unified API](https://docs.api.plenty.network) in conjunction with the SDK.
 
 ## 📝 Guide
 
@@ -100,7 +100,7 @@ import { Pool } from "@plenty-labs/v3-sdk";
 
 The same can achieved for estimate token y to token x swaps through `pool.estimateSwapYToX(...)`.
 
-Both `estimateSwapYToX` and `estimateSwapXToY` accept a custom function of type `(index: number) => Promise<TickElement>` as the second argument. It is upon you to device a way of supplying the tick states to the estimation function. You can either use Taquito (as shown above), [tzkt API](https://api.tzkt.io/#operation/BigMaps_GetKeys) or [Plenty's unified API]()
+Both `estimateSwapYToX` and `estimateSwapXToY` accept a custom function of type `(index: number) => Promise<TickElement>` as the second argument. It is upon you to device a way of supplying the tick states to the estimation function. You can either use Taquito (as shown above), [tzkt API](https://api.tzkt.io/#operation/BigMaps_GetKeys) or [Plenty's unified API](https://docs.api.plenty.network/endpoints/v3-cfmm#ticks)
 
 ---
 
@@ -310,7 +310,7 @@ import { SwapPortal } from "@plenty-labs/v3-sdk";
 - Similarly, `SwapPortal.swapYToX(...)` can be used to swap from token y to token x.
 - You can use the [Approvals utility](https://github.com/Plenty-network/v3-sdk/blob/master/src/utils/approvals.ts) for approving token spendings for both FA1.2 and FA2 tokens.
 - By using the swap output estimation utility as explained in [this section](#estimating-swap-output), you can estimate the maximum amount of output that you may receive. You can set this as the value of `minTokenYOut` or `minTokenXOut` for a zero slippage trade.
-- `deadline` is an optional field. It defaults to 15 minutes from now. If the trade is not completed within the deadline, it does not go through.
+- `deadline` is an optional timestamp field. It defaults to 15 minutes from now. If the trade is not completed within the deadline, it does not go through.
 
 ---
 
@@ -342,7 +342,7 @@ async () => {
 };
 ```
 
-Once you have the final amounts, you can prepare the options to be passed in `PositionManager.setPositionOp(...)`. As you can see below the options require a lower and upper tick witness. The tick witness is essentially the greatest tick less than the individual ticks. To retrieve the tick witness you may either run a binary search on the initialised ticks, or use the utility provided by [Plenty's unified API]().
+Once you have the final amounts, you can prepare the options to be passed in `PositionManager.setPositionOp(...)`. As you can see below the options require a lower and upper tick witness. The tick witness is essentially the greatest tick less than the individual ticks. To retrieve the tick witness you may either run a binary search on the initialised ticks, or use the utility provided by [Plenty's unified API](https://docs.api.plenty.network/endpoints/v3-cfmm#ticks).
 
 ```typescript
 import { OpKind, ParamsWithKind } from "@taquito/taquito";
@@ -363,7 +363,7 @@ import { PositionManager, SetPositionOptions } from "@plenty-labs/v3-sdk";
       upperTickWitness: <upper-tick-witness>,
       liquidity,
       maximumTokensContributed: finalAmounts,
-      // deadline - optional date field that defaults to 15 minutes from current time
+      // deadline - optional numeric UNIX timestamp field that defaults to 15 minutes from current time
   };
 
   // Create a batch params
@@ -414,7 +414,7 @@ import { PositionManager, UpdatePositionOptions } from "@plenty-labs/v3-sdk";
       liquidityDelta, // Remember to make it negative for liquidity removal
       toX: <tz-KT-address>, // Only relevant for liquidity removal. This address is where the tokens are sent.
       toY: <tz-KT-address>, // Same as above.
-      // deadline - optional date field
+      // deadline - optional numeric UNIX timestamp field
       tokensLimit: finalAmounts, // If you intend to remove liquidity, you can reverse-calculate this through `liquidityDelta`
   };
 
