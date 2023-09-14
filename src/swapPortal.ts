@@ -18,7 +18,7 @@ export interface SwapXToYOptions {
    * Operation reverts beyond this timestamp
    * Default value is 15 minutes from current time
    */
-  deadline?: Date;
+  deadline?: number;
 
   /**
    * Tezos address to which the output tokens should be sent
@@ -41,7 +41,7 @@ export interface SwapYToXOptions {
    * Operation reverts beyond this timestamp
    * Default value is 15 minutes from current time
    */
-  deadline?: Date;
+  deadline?: number;
 
   /**
    * Tezos address to which the output tokens should be sent
@@ -57,13 +57,13 @@ export abstract class SwapPortal {
    */
   static swapXToY(pool: Contract, options: SwapXToYOptions): TransferParams {
     if (!options.deadline) {
-      options.deadline = new Date(Date.now() + 900000); // 15 minutes
+      options.deadline = Math.floor(Date.now() / 1000) + 900; // 15 minutes
     }
 
     return pool.methodsObject
       .x_to_y({
         dx: options.tokenXIn,
-        deadline: Math.floor(options.deadline.getTime() / 1000),
+        deadline: options.deadline,
         min_dy: options.minTokenYOut,
         to_dy: options.recipient,
       })
@@ -77,13 +77,13 @@ export abstract class SwapPortal {
    */
   static swapYToX(pool: Contract, options: SwapYToXOptions): TransferParams {
     if (!options.deadline) {
-      options.deadline = new Date(Date.now() + 900000); // 15 minutes
+      options.deadline = Math.floor(Date.now() / 1000) + 900; // 15 minutes
     }
 
     return pool.methodsObject
       .y_to_x({
         dy: options.tokenYIn,
-        deadline: Math.floor(options.deadline.getTime() / 1000),
+        deadline: options.deadline,
         min_dx: options.minTokenXOut,
         to_dx: options.recipient,
       })

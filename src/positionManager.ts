@@ -33,7 +33,7 @@ export interface SetPositionOptions {
   /**
    * Timestamp post which the liquidity transaction will be rejected by the pool
    */
-  deadline?: Date;
+  deadline?: number;
 
   /**
    * Maximum number of individual tokens contributed
@@ -65,7 +65,7 @@ export interface UpdatePositionOptions {
   /**
    * Timestamp post which the liquidity transaction will be rejected by the pool
    */
-  deadline?: Date;
+  deadline?: number;
 
   /**
    * Maximum number of tokens contributed for addition of liquidity or
@@ -93,7 +93,7 @@ export interface CollectFeeOptions {
   /**
    * Timestamp post which the fee collection transaction will be rejected by the pool
    */
-  deadline?: Date;
+  deadline?: number;
 }
 
 export abstract class PositionManager {
@@ -104,7 +104,7 @@ export abstract class PositionManager {
    */
   static setPositionOp(pool: Contract, options: SetPositionOptions): TransferParams {
     if (!options.deadline) {
-      options.deadline = new Date(Date.now() + 900000); // 15 minutes
+      options.deadline = Math.floor(Date.now() / 1000) + 900; // 15 minutes
     }
 
     return pool.methodsObject
@@ -114,7 +114,7 @@ export abstract class PositionManager {
         lower_tick_witness: options.lowerTickWitness,
         upper_tick_witness: options.upperTickWitness,
         liquidity: options.liquidity.decimalPlaces(0),
-        deadline: Math.floor(options.deadline.getTime() / 1000),
+        deadline: options.deadline,
         maximum_tokens_contributed: {
           x: options.maximumTokensContributed.x.decimalPlaces(0),
           y: options.maximumTokensContributed.y.decimalPlaces(0),
@@ -130,7 +130,7 @@ export abstract class PositionManager {
    */
   static updatePositionOp(pool: Contract, options: UpdatePositionOptions): TransferParams {
     if (!options.deadline) {
-      options.deadline = new Date(Date.now() + 900000); // 15 minutes
+      options.deadline = Math.floor(Date.now() / 1000) + 900; // 15 minutes
     }
 
     return pool.methodsObject
@@ -139,7 +139,7 @@ export abstract class PositionManager {
         liquidity_delta: options.liquidityDelta.decimalPlaces(0),
         to_x: options.toX,
         to_y: options.toY,
-        deadline: Math.floor(options.deadline.getTime() / 1000),
+        deadline: options.deadline,
         tokens_limit: {
           x: options.tokensLimit.x.decimalPlaces(0),
           y: options.tokensLimit.y.decimalPlaces(0),
