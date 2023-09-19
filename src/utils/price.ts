@@ -16,7 +16,7 @@ export abstract class Price {
       throw "INVALID_TOKEN_ORDERING";
     }
     return Math2.sqrt(
-      Math2.bitShift(realPrice.multipliedBy(10 ** tokenX.decimals).dividedBy(10 ** tokenY.decimals), -160)
+      Math2.bitShift(realPrice.multipliedBy(10 ** tokenY.decimals).dividedBy(10 ** tokenX.decimals), -160)
     );
   }
 
