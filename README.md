@@ -1,4 +1,4 @@
-# Plentyswap V3 SDK
+# Plenty V3 SDK
 
 This repository contains our beta V3 SDK for Typescript developers. It simplifies interaction with [Plenty's segmented CFMM](https://github.com/Plenty-network/plentyswap-v3) by offering essential math utilities and operation object creation for tasks like swapping, liquidity management, and staking positions in farms.
 
