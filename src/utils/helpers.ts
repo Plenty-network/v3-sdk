@@ -6,7 +6,7 @@ export abstract class Helpers {
       throw "SAME_TOKENS_NOT_ALLOWED";
     }
 
-    const yIsFa12 = !tokenY.tokenId && tokenX.tokenId;
+    const yIsFa12 = tokenY.tokenId === undefined && tokenX.tokenId !== undefined;
     const yAddressIsSmaller = tokenY.address < tokenX.address;
     const yTokenIdIsSmaller = tokenX.address === tokenY.address && (tokenY.tokenId ?? 0) < (tokenX.tokenId ?? 0);
 
