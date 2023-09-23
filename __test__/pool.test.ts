@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 
-import { Pool, TickElement, ZERO_VAL } from "../dist";
+import { Pool, Price, Tick, TickElement, ZERO_VAL } from "../dist";
 
 describe("swap estimation", () => {
   const ticks: { [key: string]: TickElement } = {
@@ -56,5 +56,15 @@ describe("swap estimation", () => {
 
     expect(step.dx).toEqual(new BigNumber("931250017954393654"));
     expect(step.dy).toEqual(ZERO_VAL);
+  });
+
+  it("", () => {
+    console.log(
+      Price.computeRealPriceFromSqrtPrice(
+        Tick.computeSqrtPriceFromTick(-114600),
+        { address: "KT1SjXiUX63QvdNMcM2m492f7kuf8JxXRLp4", decimals: 8 },
+        { address: "KT1GBgCd5dk7v4TSzWvtk1X64TxMyG4r7eRX", decimals: 6, tokenId: 0 }
+      ).toNumber()
+    );
   });
 });

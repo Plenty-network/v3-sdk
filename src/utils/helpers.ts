@@ -6,11 +6,13 @@ export abstract class Helpers {
       throw "SAME_TOKENS_NOT_ALLOWED";
     }
 
-    const yIsFa12 = tokenY.tokenId === undefined && tokenX.tokenId !== undefined;
+    const isTokenXFA2 = tokenX.tokenId !== undefined;
+    const isTokenYFa2 = tokenY.tokenId !== undefined;
+
     const yAddressIsSmaller = tokenY.address < tokenX.address;
     const yTokenIdIsSmaller = tokenX.address === tokenY.address && (tokenY.tokenId ?? 0) < (tokenX.tokenId ?? 0);
 
-    if (yIsFa12 || yAddressIsSmaller || yTokenIdIsSmaller) {
+    if ((isTokenXFA2 && !isTokenYFa2) || (isTokenXFA2 === isTokenYFa2 && yAddressIsSmaller) || yTokenIdIsSmaller) {
       return false;
     }
     return true;
