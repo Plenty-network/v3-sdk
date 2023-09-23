@@ -54,8 +54,10 @@ export abstract class PoolDeployer {
 
     return factory.methodsObject
       .deploy_pool({
-        token_x: tx.tokenId ? { fa2: { address: tx.address, token_id: tx.tokenId } } : { fa12: tx.address },
-        token_y: ty.tokenId ? { fa2: { address: ty.address, token_id: ty.tokenId } } : { fa12: ty.address },
+        token_x:
+          tx.tokenId !== undefined ? { fa2: { address: tx.address, token_id: tx.tokenId } } : { fa12: tx.address },
+        token_y:
+          ty.tokenId !== undefined ? { fa2: { address: ty.address, token_id: ty.tokenId } } : { fa12: ty.address },
         fee_bps: options.feeBps,
         initial_tick_index: Tick.computeTickFromSqrtPrice(
           Price.computeSqrtPriceFromRealPrice(rp, tx, ty),
